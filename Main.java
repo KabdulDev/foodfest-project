@@ -52,11 +52,11 @@ public class Main {
 
     public static String orderName(){
         String orderName;
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr2 = new Scanner(System.in);
         System.out.print("What is your name for the order?");
-        orderName = scnr.next();
+        orderName = scnr2.next();
 
-        
+        scnr2.close();
         return orderName;
         
     }
@@ -102,7 +102,7 @@ public class Main {
     }
 
     public static void order(String orderName){
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr3 = new Scanner(System.in);
 
         String appetizer = " ";
         String entree= " ";
@@ -121,26 +121,26 @@ public class Main {
         menuDisplay(menuOption,orderName);
 
 
-        int choice = scnr.nextInt();
+        int choice = scnr3.nextInt();
         while (choice != 0){
             if( choice == 1){
                 appetizer = appetizer();
                 menuDisplay(menuOption,orderName);
-                choice = scnr.nextInt();
+                choice = scnr3.nextInt();
             }
             else if( choice == 2){
                 entree = entree();
                 menuDisplay(menuOption,orderName);
-                choice = scnr.nextInt();
+                choice = scnr3.nextInt();
             }
             else if( choice == 3){
                 dessert = dessert();
                 menuDisplay(menuOption,orderName);
-                choice = scnr.nextInt();
+                choice = scnr3.nextInt();
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
-                choice = scnr.nextInt();
+                choice = scnr3.nextInt();
             }
         }
         
@@ -150,6 +150,8 @@ public class Main {
         System.out.printf("%s%n",dessert);
         System.out.println("");
         System.out.print("Enjoy your meal!");
+
+        scnr3.close();
     }
 
     public static String topping(int toppingSelection){
@@ -161,7 +163,7 @@ public class Main {
         String toppingMode[][] = { toppingAppetizer, toppingEntree, toppingDessert};
 
 
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr4 = new Scanner(System.in);
         
         String [] menuOption = toppingMode[toppingSelection]; //Select the mode of the topping menu items
         String selection = ""; //holds the choices that have been made
@@ -169,13 +171,13 @@ public class Main {
 
 
         menuDisplay(menuOption, 3, menuTitle[toppingSelection]);
-        int choice = scnr.nextInt();
+        int choice = scnr4.nextInt();
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
                 selection = selection + menuOption[choice];
                 menuDisplay(menuOption, 3, menuTitle[toppingSelection]);
                 //System.out.println(selection);
-                choice = scnr.nextInt();
+                choice = scnr4.nextInt();
                     if( choice == 0 ){
                         selection = selection + " ]";
                     }
@@ -184,7 +186,7 @@ public class Main {
                     }
                     else{
                         System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
-                        choice = scnr.nextInt();
+                        choice = scnr4.nextInt();
                         if( choice == 0 ){
                             selection = selection + " ]";
                         }
@@ -195,7 +197,7 @@ public class Main {
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
-                choice = scnr.nextInt();
+                choice = scnr4.nextInt();
                 if( choice == 0 ){
                     selection = selection + " ]";
                 }
@@ -205,12 +207,12 @@ public class Main {
             }
         }
         
-
+        scnr4.close();
         return selection;
     }
 
     public static String appetizer(){
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr5 = new Scanner(System.in);
         String [] menuOption = {"Done", "Spring Rolls", "Veggie Dumplings", "Fried Tofu"};
         String appSelection = "Appetizer:[ ";
 
@@ -223,73 +225,72 @@ public class Main {
 
         System.out.printf("Enter the number for your selection: "); */
         menuDisplay(menuOption, 2, "Appetizer");
-        int choice = scnr.nextInt();
+        int choice = scnr5.nextInt();
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
                 appSelection = appSelection + menuOption[choice] +  ": " + topping(0);
                 /* System.out.println(appSelection); */
                 menuDisplay(menuOption, 2, "Appetizer");
-                choice = scnr.nextInt();
+                choice = scnr5.nextInt();
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
-                choice = scnr.nextInt();
+                choice = scnr5.nextInt();
             }
         }
-        
-        
-            return appSelection;
+        scnr5.close();
+        return appSelection;
 
     }
 
     public static String entree(){
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr6 = new Scanner(System.in);
         String [] menuOption = {"Done", "Pad See Ew", "Drunken Noodles", "Pad Thai"};
         String entreeSelection = "Entree:[ ";
 
         menuDisplay(menuOption,2,"Entree");
-        int choice = scnr.nextInt();
+        int choice = scnr6.nextInt();
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
                 entreeSelection = entreeSelection + menuOption[choice] +  ": " + topping(1);
                 /* System.out.println(appSelection); */
                 menuDisplay(menuOption,2,"Entree");
-                choice = scnr.nextInt();
+                choice = scnr6.nextInt();
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
-                choice = scnr.nextInt();
+                choice = scnr6.nextInt();
             }
         }
         
-        
-
+        scnr6.close();
         return entreeSelection;
 
     }
 
     public static String dessert(){
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr7 = new Scanner(System.in);
         String [] menuOption = {"Done", "Fried Ice Cream", "Sweet Sticky Rice", "Ice Cream"};
         String dessertSelection = "Dessert:[ ";
 
         menuDisplay(menuOption,2,"Dessert");
-        int choice = scnr.nextInt();
+        int choice = scnr7.nextInt();
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
                 dessertSelection = dessertSelection + menuOption[choice] +  ": " + topping(2);
                 /* System.out.println(appSelection); */
                 menuDisplay(menuOption,2,"Dessert");
-                choice = scnr.nextInt();
+                choice = scnr7.nextInt();
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
-                choice = scnr.nextInt();
+                choice = scnr7.nextInt();
             }
         }
         
         
 
+        scnr7.close();
         return dessertSelection;
 
     }
