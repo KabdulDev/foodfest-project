@@ -44,20 +44,17 @@ public class Main {
                 orderResponse = scnr1.next();
             }
         }
-
-        scnr1.close();
-
-
     }
 
     public static String orderName(){
         String orderName;
         Scanner scnr2 = new Scanner(System.in);
-        System.out.print("What is your name for the order?");
+        System.out.print("What is your name for the order? ");
         orderName = scnr2.next();
 
-        scnr2.close();
+        
         return orderName;
+        
         
     }
 
@@ -69,7 +66,7 @@ public class Main {
             System.out.print(" ");
         }
         System.out.printf("Select from the menu, %s%n", orderName);
-        //Responsible for displaying appetizer menu options
+        //Responsible for displaying  menu options
         for (int i=0; i<menuOption.length; i++){
             System.out.printf("%11d - %s%n", i, menuOption[i]);
         }
@@ -109,49 +106,45 @@ public class Main {
         String dessert= " ";
         String [] menuOption = {"Done", "Appetizer", "Main Course", "Dessert"};
 
-        /* //Displays whole menu heading
-        System.out.printf("     Select from the menu, %s%n", orderName);
-        //Responsible for displaying appetizer menu options
-        for (int i=0; i<menuOption.length; i++){
-            System.out.printf("%10d - %s%n", i, menuOption[i]);
-        }
-
-        System.out.printf("     Enter the number for your selection: "); */
-
+        
         menuDisplay(menuOption,orderName);
 
-
         int choice = scnr3.nextInt();
+        System.out.println("");
         while (choice != 0){
             if( choice == 1){
                 appetizer = appetizer();
                 menuDisplay(menuOption,orderName);
                 choice = scnr3.nextInt();
+                System.out.println("");
             }
             else if( choice == 2){
                 entree = entree();
                 menuDisplay(menuOption,orderName);
                 choice = scnr3.nextInt();
+                System.out.println("");
             }
             else if( choice == 3){
                 dessert = dessert();
                 menuDisplay(menuOption,orderName);
                 choice = scnr3.nextInt();
+                System.out.println("");
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
                 choice = scnr3.nextInt();
             }
         }
-        
+
+       
         System.out.printf("Here is your order %s:%n", orderName);
         System.out.printf("%s%n",appetizer);
         System.out.printf("%s%n",entree);
         System.out.printf("%s%n",dessert);
         System.out.println("");
-        System.out.print("Enjoy your meal!");
+        System.out.println("Enjoy your meal!");
 
-        scnr3.close();
+        
     }
 
     public static String topping(int toppingSelection){
@@ -172,14 +165,16 @@ public class Main {
 
         menuDisplay(menuOption, 3, menuTitle[toppingSelection]);
         int choice = scnr4.nextInt();
+        System.out.println("");
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
                 selection = selection + menuOption[choice];
                 menuDisplay(menuOption, 3, menuTitle[toppingSelection]);
-                //System.out.println(selection);
                 choice = scnr4.nextInt();
+                System.out.println("");
+
                     if( choice == 0 ){
-                        selection = selection + " ]";
+                        break;
                     }
                     else if( (choice < menuOption.length) && (choice >0) ){
                         selection = selection + ", ";
@@ -187,8 +182,9 @@ public class Main {
                     else{
                         System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
                         choice = scnr4.nextInt();
+                        System.out.println("");
                         if( choice == 0 ){
-                            selection = selection + " ]";
+                            break;
                         }
                         else if( (choice < menuOption.length) && (choice >0) ){
                             selection = selection + ", ";
@@ -198,16 +194,14 @@ public class Main {
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
                 choice = scnr4.nextInt();
-                if( choice == 0 ){
-                    selection = selection + " ]";
-                }
-                else if( (choice < menuOption.length) && (choice >0) ){
+                System.out.println("");
+                if( (choice < menuOption.length) && (choice >0) ){
                     selection = selection + ", ";
                 }
             }
         }
         
-        scnr4.close();
+        
         return selection;
     }
 
@@ -216,29 +210,33 @@ public class Main {
         String [] menuOption = {"Done", "Spring Rolls", "Veggie Dumplings", "Fried Tofu"};
         String appSelection = "Appetizer:[ ";
 
-        /* //Displays appetizer menu heading
-        System.out.printf("Appetizer Menu%n");
-        //Responsible for displaying appetizer menu options
-        for (int i=0; i<menuOption.length; i++){
-            System.out.printf("%5d - %s%n", i, menuOption[i]);
-        }
-
-        System.out.printf("Enter the number for your selection: "); */
         menuDisplay(menuOption, 2, "Appetizer");
         int choice = scnr5.nextInt();
+        System.out.println("");
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
-                appSelection = appSelection + menuOption[choice] +  ": " + topping(0);
-                /* System.out.println(appSelection); */
+                appSelection = appSelection + menuOption[choice] +  ": " + topping(0) +"] ";
+               
                 menuDisplay(menuOption, 2, "Appetizer");
+
                 choice = scnr5.nextInt();
+                System.out.println("");
+                if( choice != 0 ){
+                    
+                    appSelection = appSelection+ "Appetizer:[ ";
+                }
+
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
                 choice = scnr5.nextInt();
+                System.out.println("");
+                if( choice == 0 ){
+                    appSelection = appSelection + "]";
+                }
             }
         }
-        scnr5.close();
+        
         return appSelection;
 
     }
@@ -250,20 +248,28 @@ public class Main {
 
         menuDisplay(menuOption,2,"Entree");
         int choice = scnr6.nextInt();
+        System.out.println("");
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
-                entreeSelection = entreeSelection + menuOption[choice] +  ": " + topping(1);
-                /* System.out.println(appSelection); */
+                entreeSelection = entreeSelection + menuOption[choice] +  ": " + topping(1) +"]";
+               
                 menuDisplay(menuOption,2,"Entree");
                 choice = scnr6.nextInt();
+                System.out.println("");
+                if( choice != 0 ){
+                    entreeSelection = entreeSelection + "Entree:[";
+                }
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
                 choice = scnr6.nextInt();
+                System.out.println("");
+                if( choice == 0 ){
+                    entreeSelection = entreeSelection + "]";
+                }
             }
         }
         
-        scnr6.close();
         return entreeSelection;
 
     }
@@ -275,22 +281,28 @@ public class Main {
 
         menuDisplay(menuOption,2,"Dessert");
         int choice = scnr7.nextInt();
+        System.out.println("");
         while (choice != 0){
             if( (choice < menuOption.length) && (choice >0) ){
-                dessertSelection = dessertSelection + menuOption[choice] +  ": " + topping(2);
-                /* System.out.println(appSelection); */
+                dessertSelection = dessertSelection + menuOption[choice] +  ": " + topping(2) + "]";
+                
                 menuDisplay(menuOption,2,"Dessert");
                 choice = scnr7.nextInt();
+                System.out.println("");
+                if( choice != 0 ){
+                    dessertSelection = dessertSelection + "Dessert:[";
+                }
             }
             else{
                 System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
                 choice = scnr7.nextInt();
+                System.out.println("");
+                if( choice == 0 ){
+                    dessertSelection = dessertSelection + "]";
+                }
             }
         }
         
-        
-
-        scnr7.close();
         return dessertSelection;
 
     }
