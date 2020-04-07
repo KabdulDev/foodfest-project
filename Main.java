@@ -2,6 +2,8 @@
 Author: Karimu Mohammed
 Title: Recipes for the End of the World
 Description: An interactive Project for interactive menu design
+Github: https://github.com/KabdulDev/foodfest-project.git
+Youtube runthrough: 
 */
 
 
@@ -14,13 +16,13 @@ public class Main {
     public static void foodFestival(){
         String orderResponse;
         Boolean validResponse = false;
-        Scanner scnr = new Scanner(System.in);
+        Scanner scnr1 = new Scanner(System.in);
         
 
 
         System.out.println("Welcome to the food festival");
-        System.out.print("Would you like to place an order? (yes/no)");
-        orderResponse = scnr.next();
+        System.out.print("Would you like to place an order?");
+        orderResponse = scnr1.next();
 
         while (validResponse == false){
 
@@ -36,13 +38,14 @@ public class Main {
                 validResponse = true;
             }
 
+            
             else {
-                System.out.print("Please respond yes or no: ");
-                orderResponse = scnr.next();
+                System.out.print("Would you like to place an order?");
+                orderResponse = scnr1.next();
             }
         }
 
-        
+        scnr1.close();
 
 
     }
@@ -50,7 +53,7 @@ public class Main {
     public static String orderName(){
         String orderName;
         Scanner scnr = new Scanner(System.in);
-        System.out.print("What is your name for the order? ");
+        System.out.print("What is your name for the order?");
         orderName = scnr.next();
 
         
@@ -95,7 +98,7 @@ public class Main {
         for (int i=0; i<(5*depth); i++){
             System.out.print(" ");
         }
-        System.out.printf("Enter the number for %s your selection: ", menuName.toLowerCase());
+        System.out.printf("Enter the number of your %s selection: ", menuName.toLowerCase());
     }
 
     public static void order(String orderName){
@@ -161,21 +164,9 @@ public class Main {
         Scanner scnr = new Scanner(System.in);
         
         String [] menuOption = toppingMode[toppingSelection]; //Select the mode of the topping menu items
-        //String [] menuOption = {"Done", "Plum Sauce", "Soy Sauce", "Peanut Sauce"}; //Responsible for assigning topping choices
         String selection = ""; //holds the choices that have been made
         String [] menuTitle = {"Sauce Options", "Protein Choice", "Fruit Flavor"}; //Dynamically change the header for the menu
 
-
-
-/*         //Displays topping menu heading
-        System.out.printf("%s%n", menuTitle[toppingSelection]);
-
-        //Responsible for displaying topping menu options
-        for (int i=0; i<menuOption.length; i++){
-            System.out.printf("%10d - %s%n", i, menuOption[i]);
-        }
-
-        System.out.printf("     Enter the number for your selection: "); */
 
         menuDisplay(menuOption, 3, menuTitle[toppingSelection]);
         int choice = scnr.nextInt();
@@ -194,6 +185,12 @@ public class Main {
                     else{
                         System.out.printf("We're sorry, but %d is not a valid option. Please enter a valid number for your selection: ", choice);
                         choice = scnr.nextInt();
+                        if( choice == 0 ){
+                            selection = selection + " ]";
+                        }
+                        else if( (choice < menuOption.length) && (choice >0) ){
+                            selection = selection + ", ";
+                        }
                     }
             }
             else{
